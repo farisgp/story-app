@@ -8,10 +8,10 @@ import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 import CONFIG from "../../config";
 
 class HomePage {
-  // constructor() {
-  //   this.presenter = new HomePresenter(this);
-  //   this._map = null;
-  // }
+  constructor() {
+    this.presenter = new HomePresenter(this);
+    this._map = null;
+  }
   #presenter = null;
   #map = null;
 
@@ -90,6 +90,7 @@ class HomePage {
 
     stories.forEach((story) => {
       const storyElement = `
+        <div class="story-card" data-id="${story.id}">
           <div class="story-item">
             <img src="${story.photoUrl}" alt="${story.name}'s story photo" class="story-photo">
             <div class="story-content">
@@ -102,10 +103,14 @@ class HomePage {
                   : ""
               }
             </div>
+            <button class="favorite" data-id="${
+            story.id
+          }">💾 Add to Favorite</button>
           </div>
+        </div>
       `;
       this.storiesContainer.innerHTML += storyElement;
-      // this.presenter._bindFavoriteButtons(stories);
+      this.presenter._bindFavoriteButtons(stories);
     });
   }
 

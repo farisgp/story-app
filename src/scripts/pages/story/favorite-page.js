@@ -66,13 +66,25 @@ class FavoritePage {
   //   await this.#presenter.initialize();
   // }
   async afterRender() {
-    try {
-      await this.presenter.initialize();
-      this.setupEventListeners();
-    } catch (error) {
-      console.error("Initialization error:", error);
-      this.showError(`Initialization failed: ${error.message}`);
-    }
+    // try {
+    //   await this.presenter.initialize();
+    //   this.setupEventListeners();
+    // } catch (error) {
+    //   console.error("Initialization error:", error);
+    //   this.showError(`Initialization failed: ${error.message}`);
+    // }
+    const container = document.querySelector("#home-container");
+    container.innerHTML = this.#getTemplate();
+
+    this.#presenter = new FavoritePresenter ({
+      showLoading: this.showLoading.bind(this),
+      hideLoading: this.hideLoading.bind(this),
+      showError: this.showError.bind(this),
+      renderStories: this.renderStories.bind(this),
+      initMapAndMarkers: this.initMapAndMarkers.bind(this),
+    });
+
+    await this.#presenter.loadStories();
   }
 
   setupEventListeners() {

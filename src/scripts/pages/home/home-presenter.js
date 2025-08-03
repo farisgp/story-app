@@ -1,7 +1,7 @@
 import { getAllStories } from "../../data/api";
 import CONFIG from "../../config";
 import { getToken } from "../auth/auth";
-// import { saveStoryToFavorites } from "../../data/database.js";
+import { saveStoryToFavorites } from "../../data/database.js";
 
 class HomePresenter {
   #view = null;

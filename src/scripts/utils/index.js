@@ -11,10 +11,6 @@ export function sleep(time = 1000) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-export function isServiceWorkerAvailable() {
-  return "serviceWorker" in navigator;
-}
-
 export function setupSkipToContent(element, mainContent) {
   element.addEventListener('click', () => mainContent.focus());
 }
@@ -53,6 +49,10 @@ export function transitionHelper({ skipTransition = false, updateDOM }) {
 
 export function navigateTo(hash) {
   window.location.hash = hash;
+}
+
+export function isServiceWorkerAvailable() {
+  return "serviceWorker" in navigator;
 }
 
 export async function registerServiceWorker() {

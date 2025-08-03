@@ -1,7 +1,7 @@
 import "../styles/styles.css";
 
 import App from "./pages/app";
-import { registerServiceWorker } from './utils';
+import { registerServiceWorker } from './utils/index';
 import { getActiveRoute } from "./routes/url-parser";
 import { getToken } from "../scripts/pages/auth/auth";
 import { removeToken } from "./data/api";
@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     await app.renderPage();
   }
 
+  await registerServiceWorker();
+
   window.addEventListener("hashchange", async () => {
     const updatedUserToken = getToken();
     const currentActivePath = getActiveRoute();
@@ -60,11 +62,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  await registerServiceWorker();
 
   console.log('Berhasil mendaftarkan service worker.');
- 
-  window.addEventListener('hashchange', async () => {
-    await app.renderPage();
-  });
 });
